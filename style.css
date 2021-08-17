@@ -4,6 +4,8 @@
     border: 0px;
 }
 
+
+ /* Buttons by Candice Wu */
 button {
     padding: 10px;
     margin: 10px;
@@ -13,4 +15,12 @@ button {
     font-size: 20px;
     background-color: #19607E;
     color: white;
+  }
+
+  #button1, #button2, #button3, #button4 {
+    display: none;
+  }
+
+  #timer {
+   display: none;   
   }
