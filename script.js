@@ -22,48 +22,48 @@ var timerOn;
 
 /*question objects contain the promp and answers as well as correct answer for each question card*/
 var question1 = {
-    prompt: "the text for the question",
-    answer1: "1. whaterver",
-    answer2: "2. whaterver",
-    answer3: "3. whaterver",
-    answer4: "4. whaterver",
-    answer: "1",
-};
-
-var question2 = {
-    prompt: "the text for the second question",
-    answer1: "1. pineapple",
-    answer2: "2. whaterver",
-    answer3: "3. whaterver",
-    answer4: "4. whaterver",
+    prompt: "Where in HTML do you link a Javascript file?",
+    answer1: "1. In the header",
+    answer2: "2. At the bottom right before the closing tag body",
+    answer3: "3. After closing tag body",
+    answer4: "4. Before the CSS file link",
     answer: "2",
 };
 
-var question3 = {
-    prompt: "the text for the third question",
-    answer1: "1. whaterver",
-    answer2: "2. whaterver",
-    answer3: "3. whaterver",
-    answer4: "4. whaterver",
+var question2 = {
+    prompt: "What does .shift do?",
+    answer1: "1. Removes the last element from an array”",
+    answer2: "2. Adds an element to the end of the array",
+    answer3: "3. Removes the first element from an array",
+    answer4: "4. Adds an element to the beginning of the array",
     answer: "3",
 };
 
-var question4 = {
-    prompt: "the text for the fourth question",
-    answer1: "1. whaterver",
-    answer2: "2. whaterver",
-    answer3: "3. whaterver",
-    answer4: "4. whaterver",
+var question3 = {
+    prompt: "What is NOT a primitive data type?",
+    answer1: "1. Null",
+    answer2: "2. String",
+    answer3: "3. Number",
+    answer4: "4. True/False",
     answer: "4",
 };
 
+var question4 = {
+    prompt: "What does API stand for?",
+    answer1: "1. Application Programming Interface",
+    answer2: "2. Associated Platform Internet",
+    answer3: "3. Applicable Program Interaction",
+    answer4: "4. Applied Preface Instance",
+    answer: "1",
+};
+
 var question5 = {
-    prompt: "the text for the fifth question",
-    answer1: "1. whaterver",
-    answer2: "2. whaterver",
-    answer3: "3. whaterver",
-    answer4: "4. whaterver",
-    answer: "4",
+    prompt: "What is a console log?",
+    answer1: "1. It is a way to display a message on the debugging console",
+    answer2: "2. It is a method",
+    answer3: "3. It is a variable",
+    answer4: "4. It connects to your HTML",
+    answer: "1",
 };
 
 var allQuestions = [question1, question2, question3, question4, question5];
