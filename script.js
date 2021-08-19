@@ -11,6 +11,9 @@ var h1El = document.querySelector("#prompt");
 var showAnswer = document.querySelector("p");
 var scorePage = document.querySelector("form");
 var submitButton = document.querySelector("#nameButton");
+var scoreList = document.querySelector("#scoreList");
+var playerName = document.querySelector("#playerName");
+var playAgain = document.querySelector("#playAgain");
 var finalScore = "";
 var timerCount = 60;
 var timerOn;
@@ -97,7 +100,7 @@ function updatescreen() {
         button3.setAttribute("style", "display: none;");
         button4.setAttribute("style", "display: none;");
         gameEnd()
-            return;
+        return;
     }
 
 };
@@ -111,7 +114,8 @@ function startTimer() {
         if (timerCount <= 0) {
             // stops execution of action at set interval
             clearInterval(timerOn);
-            timerOut()
+            questionNum = 10;
+            updatescreen();
         }
     }, 1000); // timeCurrent is a loop, iterates
 }
@@ -189,23 +193,69 @@ document.addEventListener("click", function (event) {
     };
 });
 
-document.addEventListener("submit", function(event) {
-         event.preventDefault();
-         submitScore()
-        
+document.addEventListener("submit", function (event) {
+    event.preventDefault();
+    finalScore = playerName.value + " got " + finalScore;
+    submitScore()
+
 
 });
 
 
 function gameEnd() {
-    showAnswer.textContent="";
-    finalScore = score +" correct in " +  timerCount +" seconds";
+    showAnswer.textContent = "";
+    finalScore = score + " correct with " + timerCount + " seconds remaining";
     console.log(finalScore)
-    h1El.textContent = "You finished with a score of " + score +"/5 and " + timerCount +" seconds remaining!";
+    h1El.textContent = "You finished with a score of " + score + "/5 and " + timerCount + " seconds remaining!";
     scorePage.setAttribute("style", "display: block;");
 };
 
+// handles setting and getting local storage, as well as pushing saved scores to list items
 function submitScore() {
-    workingScores = localStorage.getItem("scores");
-    localStorage.setItem("scores", workingScores.push(finalScore));
+    workingScores = "";
+
+
+    workingScores = workingScores.concat(localStorage.getItem("scores"));
+
+    console.log(workingScores);
+    workingScores = workingScores.split(",");
+    workingScores = workingScores.concat(finalScore);
+    console.log(workingScores);
+// so a null keeps attaching to the front of working scores and I can't
+// avoid it so we're just skipping position 0
+    for (var i = 1; i < workingScores.length; i++) {
+        var eachName = document.createElement("li");  //creates a list item element
+        eachName.textContent = workingScores[i];      //assigns the current position to that list item
+        scoreList.appendChild(eachName);  //appends list item to list
+
+    };
+    playAgain.setAttribute("style", "display:block;");
+    scoreList.setAttribute("style", "display: block;");
+    scorePage.setAttribute("style", "display: none;");
+    h1El.textContent = "All Scores"
+    localStorage.setItem("scores", workingScores);
+
+
 };
+
+//resets the game 
+document.addEventListener("click", function (event) {
+    if (event.target === playAgain) {
+        h1El.textContent = "Quiz time!";
+        start.setAttribute("style", "display: block;");
+        // deletes all list items so the list doesn't double each print
+        var child = scoreList.lastElementChild;
+        while (child) {
+            scoreList.removeChild(child);
+            child = scoreList.lastElementChild;
+        };
+
+        score = 0;
+        questionNum = 0;
+        finalScore = "";
+        timerCount = 60;
+        currentQuestion = "";
+        playAgain.setAttribute("style", "display: none;");
+
+    }
+});
