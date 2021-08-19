@@ -24,3 +24,27 @@ button {
   #timer {
    display: none;   
   }
+
+  p {
+      font-weight: bold;
+      font-size: 200%;
+  }
+
+  form {
+      display:none;
+      background-color:grey;
+      max-width: 400px;
+  }
+
+  form button {
+    min-width: 50px;
+    min-height: 10px;
+  }
+
+  ul {
+      background-color: black;
+      display: none;
+  }
+  ul li {
+      background-color: gainsboro;
+  }

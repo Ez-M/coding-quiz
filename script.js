@@ -9,6 +9,13 @@ var button4 = document.querySelector("#button4");
 var start = document.querySelector("#startButton");
 var h1El = document.querySelector("#prompt");
 var showAnswer = document.querySelector("p");
+var scorePage = document.querySelector("form");
+var submitButton = document.querySelector("#nameButton");
+var finalScore = "";
+var timerCount = 60;
+var timerOn;
+
+
 
 /*question objects contain the promp and answers as well as correct answer for each question card*/
 var question1 = {
@@ -58,20 +65,59 @@ var question5 = {
 
 var allQuestions = [question1, question2, question3, question4, question5];
 var currentQuestion = allQuestions[questionNum];
-updatescreen();
+
 
 //needs update button function
 
-function updatescreen(){
-currentQuestion = allQuestions[questionNum];
 
-h1El.textContent = currentQuestion.prompt;
-button1.textContent = currentQuestion.answer1;
-button2.textContent = currentQuestion.answer2;
-button3.textContent = currentQuestion.answer3;
-button4.textContent = currentQuestion.answer4;
-return;
-} ;
+
+function updatescreen() {
+
+    currentQuestion = allQuestions[questionNum];
+    //checks to see if all questions have been ran through
+    if (questionNum < allQuestions.length) {
+        h1El.textContent = currentQuestion.prompt;
+        button1.textContent = currentQuestion.answer1;
+        button2.textContent = currentQuestion.answer2;
+        button3.textContent = currentQuestion.answer3;
+        button4.textContent = currentQuestion.answer4;
+        showAnswer.textContent = ""
+        button1.setAttribute("style", "display: block;");
+        button2.setAttribute("style", "display: block;");
+        button3.setAttribute("style", "display: block;");
+        button4.setAttribute("style", "display: block;");
+        return;
+    }
+    //if all questions have been ran through, hide buttons and timer + show end screen
+    else {
+        clearInterval(timerOn);
+        timer.setAttribute("style", "display: none;");
+        button1.setAttribute("style", "display: none;");
+        button2.setAttribute("style", "display: none;");
+        button3.setAttribute("style", "display: none;");
+        button4.setAttribute("style", "display: none;");
+        gameEnd()
+            return;
+    }
+
+};
+
+// function that sets timer
+function startTimer() {
+    timerOn = setInterval(function () {
+        timerCount--;
+        console.log(timerCount);
+        timer.textContent = timerCount;
+        if (timerCount <= 0) {
+            // stops execution of action at set interval
+            clearInterval(timerOn);
+            timerOut()
+        }
+    }, 1000); // timeCurrent is a loop, iterates
+}
+
+
+
 
 
 
@@ -85,23 +131,42 @@ document.addEventListener("click", function (event) {
         event.target === button2 ||
         event.target === button3 ||
         event.target === button4) {
-          //  console.log(event.target.textContent[0]);
-           // console.log(currentQuestion.answer);
-//compres the first character of the textContent of the click target with the "answer"
-//variable of the current quesstion
-//if correct, displays correct on screen, and increases questionNum by 1
+
+
+        //compres the first character of the textContent of the click target with the "answer"
+        //variable of the current quesstion
+        //if correct, displays correct on screen, and increases questionNum by 1
         if (event.target.textContent[0] === currentQuestion.answer) {
             console.log("Correct");
-            questionNum++;
+
             score++;
             showAnswer.textContent = "Correct!"
+            //hides buttons and adds delay to reveal of next question
+            button1.setAttribute("style", "display: none;");
+            button2.setAttribute("style", "display: none;");
+            button3.setAttribute("style", "display: none;");
+            button4.setAttribute("style", "display: none;");
+            setTimeout(function () {
+                questionNum++;
+                updatescreen()
+            }, 1000);
 
-            updatescreen();
+
         }
         else {
             console.log("Incorrect!");
             showAnswer.textContent = "Incorrect!"
-            updatescreen();
+            //hides buttons and adds delay to reveal of next question
+            button1.setAttribute("style", "display: none;");
+            button2.setAttribute("style", "display: none;");
+            button3.setAttribute("style", "display: none;");
+            button4.setAttribute("style", "display: none;");
+            timerCount = timerCount - 10;
+            setTimeout(function () {
+                questionNum++;
+                updatescreen()
+            }, 1000);
+
         };
     }
     else {
@@ -111,8 +176,10 @@ document.addEventListener("click", function (event) {
 });
 //All answer buttons, and timer start hidden. Revealed and timer started when start button pressed
 //start button is also hidden when clicked
-document.addEventListener("click",function(event) {
+document.addEventListener("click", function (event) {
     if (event.target === start) {
+        updatescreen()
+        startTimer();
         button1.setAttribute("style", "display: block;");
         button2.setAttribute("style", "display: block;");
         button3.setAttribute("style", "display: block;");
@@ -121,3 +188,24 @@ document.addEventListener("click",function(event) {
         start.setAttribute("style", "display: none;");
     };
 });
+
+document.addEventListener("submit", function(event) {
+         event.preventDefault();
+         submitScore()
+        
+
+});
+
+
+function gameEnd() {
+    showAnswer.textContent="";
+    finalScore = score +" correct in " +  timerCount +" seconds";
+    console.log(finalScore)
+    h1El.textContent = "You finished with a score of " + score +"/5 and " + timerCount +" seconds remaining!";
+    scorePage.setAttribute("style", "display: block;");
+};
+
+function submitScore() {
+    workingScores = localStorage.getItem("scores");
+    localStorage.setItem("scores", workingScores.push(finalScore));
+};
