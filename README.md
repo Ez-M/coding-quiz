@@ -1,61 +1,19 @@
-# coding-quiz
-A multiple choice coding quiz
+## Coding Quiz App
+A brief coding quiz written almost entirely through Java
 
+# about
+The project started as a simple coding quiz but sought to a lot of functionality that served as practice and experience in manipulating the DOM dynamically through JavaScript as well as maintaining a user's status as they work through the quiz and stored history with the app. 
 
-each question has 4 multiple choice questions
+While I did not focus on general aesthetics, there are a lot of minor quality of life features such as a long-term scoreboard, visible timer, and built in feedback for answers that also allows for a smoother transition between questions. 
 
-make each question an object?
+# Install
+all files are included, simply launch in browser
 
+# Use
+Quiz is intended for study, 
+The quiz can be ran through multiple times, with a non-timed "try again" feature to allow for study between rounds. 
+    ![composite image showing program functionality and appearance](images/capture.JPG)
 
-eventlistener("click",function())
-
-
-Buttons need to change with the questions
-
-picking a question
-var currentquestion = 0
-
-
-
-the "correct" button is dependant on the question
-    >One of the buttons has a variable set to true
-    >if(button=true) {
-        score++
-        setcontent "Correct!"
-    }   else {
-        setcontent "Wrong!"
-    }
-    currentquestion++
-
-//not strictly necessary according to assignment
-//but randomly chosen cards would be cool
-pickaquestion () {
-    math.floor(math.random()*allquestions.length)
-}
-
-questions = [question1, question2]
-currentQuestion = questions[w]
-object question1:
-    prompt: "the text for the question"
-    answer1: "1. whaterver
-    answer2: "2. whaterver
-    answer3: "3. whaterver
-    answer4: "4. whaterver
-    theAnswer: 1
-
-
-questionPrompt.setcontent( currentquestion.prompt)
-button1.setcontent (currentquestion.answer1)
-button2.setcontent (currentquestion.answer2)
-button3.setcontent (currentquestion.answer3)
-button4.setcontent (currentquestion.answer4)
-
-eventListener("click")
-    event.target
-    if (target[0] == theAnswer)
-      score++
-        setcontent "Correct!"
-    }   else {
-        setcontent "Wrong!"
-    }
-    currentquestion++
+    
+# Credits 
+My classmate Candice Wu provided both my button styling and actual quiz questions
